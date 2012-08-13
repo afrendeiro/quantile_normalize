@@ -1,3 +1,9 @@
+*~
+.#*
+#*
+\#*
+.DS*
+*.tab
 *.py[co]
 
 # Packages

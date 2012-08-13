@@ -14,6 +14,18 @@ MATRIX = """1	2	5	1
 		8	
 6	23	1	0"""
 
+MATRIX_QNORMED = """1	1	4	10.5000000000000
+10.5000000000000		1.59375000000000	2.79166666666667
+6.33333333333333	4	10.5000000000000	2.79166666666667
+		7.50000000000000	
+2.79166666666667	10.5000000000000	1.59375000000000	2.79166666666667"""
+
+MATRIX = """1	2	5	1
+9		1	0
+8	4	9	0
+		8	
+6	23	1	0"""
+
 
 class TestInterpolate(unittest.TestCase):
   def test_interpolate1(self):
@@ -38,6 +50,10 @@ class TestQuantileNorm(unittest.TestCase):
     self.assertEqual(M.mask[0,0], False)
     self.assertEqual(M.mask[3,0], True)
     quantile_norm(M)
+    print M
+    # verify results
+    Q = np.genfromtxt(StringIO(MATRIX_QNORMED), delimiter="\t", usemask=True)
+    self.assertTrue(np.mean(M-Q) < 0.00000000001 )
     
 if __name__ == "__main__":
   unittest.main()

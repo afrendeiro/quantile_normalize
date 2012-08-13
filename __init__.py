@@ -53,7 +53,7 @@ def quantile_norm(M):
     # Get equivalence classes; unique values == 0
     dupes = np.zeros(m, dtype=np.int)
     for j in xrange(r-1):
-      if M[Q[j,i]] == M[Q[j+1,i]]:
+      if M[Q[j,i],i] == M[Q[j+1,i],i]:
         dupes[j+1] = dupes[j]+1
     # zero-out ranks higher than the number of values (to prevent out of range errors)
     ranks[ranks>=r] = 0
@@ -66,8 +66,7 @@ def quantile_norm(M):
         j -= 1
       else:
         idxs = Q[j-dupes[j]:j+1,i]
-        assert idxs[1:]-1 == idxs[:-1]
-        M.data[idxs] = M.data[idxs].mean()
+        M.data[idxs,i] = np.median(M.data[idxs,i])
         j -= 1 + dupes[j]
     assert j == -1
   
