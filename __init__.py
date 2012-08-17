@@ -31,7 +31,8 @@ def quantile_norm(M):
   """Quantile normalize masked array M in place."""
   Q = M.argsort(0)
   m, n = np.size(M,0), np.size(M,1)
-  counts = np.array([m - np.count_nonzero(M.mask[:,i]) for i in range(n)])
+  # np.count_nonzero changed to np.sum for numpy1.5
+  counts = np.array([m - np.sum(M.mask[:,i]) for i in range(n)])
 
   # compute quantile vector
   quantiles = np.zeros(m)
