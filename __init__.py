@@ -24,8 +24,10 @@ def my_interpolate(pos, v):
 
   
 def frac_intervals(n):
-  """Fractional intervals 0 to 1"""
-  return np.arange(0,n)/(n-1)
+  """n intervals uniformly spaced from 0 to 1 inclusive"""
+  q = np.arange(0,n)/(n-1)
+  q[0],q[-1] = 0, 1
+  return q
 
 def quantile_norm(M):
   """Quantile normalize masked array M in place."""
@@ -43,6 +45,7 @@ def quantile_norm(M):
     # create linear interpolator 
     f = interpolate.interp1d(np.arange(r)/(r-1), v)
     v_full = f(frac_intervals(m))
+
     quantiles += v_full
   quantiles = quantiles / n
   f_quantile = interpolate.interp1d(frac_intervals(m), quantiles)

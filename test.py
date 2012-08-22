@@ -35,10 +35,14 @@ class TestFractionalIntervals(unittest.TestCase):
     M = 4
     q = frac_intervals(M)
     self.assertEqual(np.size(q), M)
-  def test_range2(self):
+  def test_range3(self):
     M = 22280
     q = frac_intervals(M)
-    self.assertEqual(np.size(q), M)    
+    self.assertEqual(np.size(q), M)
+  def test_range4(self):
+    M = 22280
+    q = frac_intervals(M)
+    self.assertEqual(np.size(q), M)
 
 class TestInterpolate(unittest.TestCase):
   def test_interpolate1(self):
