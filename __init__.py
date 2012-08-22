@@ -24,8 +24,8 @@ def my_interpolate(pos, v):
 
   
 def frac_intervals(n):
-  x = 1/(n-1)
-  return np.arange(0,1+x,x)
+  """Fractional intervals 0 to 1"""
+  return np.arange(0,n)/(n-1)
 
 def quantile_norm(M):
   """Quantile normalize masked array M in place."""

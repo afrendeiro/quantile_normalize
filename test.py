@@ -26,6 +26,19 @@ MATRIX = """1	2	5	1
 		8	
 6	23	1	0"""
 
+class TestFractionalIntervals(unittest.TestCase):
+  def test_range1(self):
+    M = 22283
+    q = frac_intervals(M)
+    self.assertEqual(np.size(q), M)
+  def test_range2(self):
+    M = 4
+    q = frac_intervals(M)
+    self.assertEqual(np.size(q), M)
+  def test_range2(self):
+    M = 22280
+    q = frac_intervals(M)
+    self.assertEqual(np.size(q), M)    
 
 class TestInterpolate(unittest.TestCase):
   def test_interpolate1(self):
