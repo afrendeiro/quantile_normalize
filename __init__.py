@@ -31,7 +31,7 @@ def frac_intervals(n):
 
 def quantile_norm(M):
   """Quantile normalize masked array M in place."""
-  Q = M.argsort(0)
+  Q = M.argsort(0, fill_value=np.inf)
   m, n = np.size(M,0), np.size(M,1)
   # np.count_nonzero changed to np.sum for numpy1.5
   counts = np.array([m - np.sum(M.mask[:,i]) for i in range(n)])
@@ -41,8 +41,8 @@ def quantile_norm(M):
   for i in xrange(n):
     # select first [# values] rows of argsorted column in Q
     r = counts[i] # number of non-missing values for this column
-    v = M.data[:,i][Q[:r,i]]
-    # create linear interpolator 
+    v = M.data[:,i][Q[:r,i]] # ranks > r point to missing values == infinity
+    # create linear interpolator for existing values
     f = interpolate.interp1d(np.arange(r)/(r-1), v)
     v_full = f(frac_intervals(m))
 
